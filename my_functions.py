@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 import numpy as np
+import re 
 
 # Function to read the coordinates from a Gaussian output file
 ## Input : log_file_name - Name of the Gaussian output file
 ## Output: coordinates - List of tuples with the element and the coordinates
+#### 24-06-24
+
 def read_gaussian_output(log_file_name):
     # Creating Arrays
     all_lines = []
@@ -63,3 +66,40 @@ def read_gaussian_output(log_file_name):
     coordinates.sort(key=lambda coord: coord[0])
 
     return coordinates
+
+
+# Function to read the convergence data from a Gaussian output file
+## Input : file_path - Name of the Gaussian output file
+## Output: data - Dictionary with the convergence data
+##         thresholds - Dictionary with the thresholds for the convergence data
+#### 26-06-24
+def convergence_data(file_path):
+    with open(file_path, 'r') as file:
+        content = file.read()
+
+    pattern = r'Item\s+Value\s+Threshold\s+Converged\?\n(.*?)\n(.*?)\n(.*?)\n(.*?)\n'
+    matches = re.findall(pattern, content, re.DOTALL)
+
+    data = {
+        'Maximum Force': [],
+        'RMS Force': [],
+        'Maximum Displacement': [],
+        'RMS Displacement': []
+    }
+
+    for match in matches:
+        for line in match:
+            parts = line.split()
+            if len(parts) >= 3:
+                key = ' '.join(parts[:-3])
+                value = float(parts[-3])
+                data[key].append(value)
+
+    thresholds = {
+        'Maximum Force': 0.000450,
+        'RMS Force': 0.000300,
+        'Maximum Displacement': 0.001800,
+        'RMS Displacement': 0.001200
+    }
+
+    return data, thresholds
