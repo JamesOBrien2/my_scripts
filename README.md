@@ -5,7 +5,7 @@ Here is a repository where I will be dumping any scripts I make.
 # Directories Overview
 
 ```
-├── **my_functions.py** 
+├── my_functions.py 
 ├── convergence_plots       
 |    ├── convergence_cli
 |    ├── convergence_interactive
