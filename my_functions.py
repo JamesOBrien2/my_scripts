@@ -103,3 +103,40 @@ def convergence_data(file_path):
     }
 
     return data, thresholds
+
+# Function to convert Bohr to Angstrom
+## Input : bohr - Value in Bohr
+## Output: Value in Angstrom
+#### 15-07-24
+def bohr_to_angstrom(bohr):
+    return bohr * 0.529177249
+
+# Function to convert coordinates from a .coord file to a .xyz file
+## Input : input_file - Name of the .coord file
+##         output_file - Name of the .xyz file
+## Output: output_file - .xyz file with the coordinates
+#### 15-07-24
+def convert_coord_to_xyz(input_file, output_file):
+    with open(input_file, 'r') as f:
+        lines = f.readlines()
+
+    atoms = []
+    for line in lines:
+        if line.strip() == '$coord':
+            continue
+        if line.strip() == '$end':
+            break
+        parts = line.split()
+        if len(parts) == 4:
+            x, y, z, element = parts
+            atoms.append((element, float(x), float(y), float(z)))
+
+    with open(output_file, 'w') as f:
+        f.write(f"{len(atoms)}\n")
+        f.write("converted from coord file\n")
+        for atom in atoms:
+            element, x, y, z = atom
+            x_ang = bohr_to_angstrom(float(x))
+            y_ang = bohr_to_angstrom(float(y))
+            z_ang = bohr_to_angstrom(float(z))
+            f.write(f"{element.ljust(2)} {x_ang:12.6f} {y_ang:12.6f} {z_ang:12.6f}\n")
