@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import sys
 from my_functions import bohr_to_angstrom, convert_coord_to_xyz
 
