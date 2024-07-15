@@ -2,7 +2,7 @@
 import sys
 from my_functions import bohr_to_angstrom, convert_coord_to_xyz
 
-if len(sys.argv) != 3:
+if len(sys.argv) != 2:
     print("Usage: coord2xyz.py input_file")
     sys.exit(1)
 
