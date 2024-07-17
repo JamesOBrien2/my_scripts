@@ -1,0 +1,2 @@
+# supporting_info_nbo
+This Python script searches for and extracts Natural Bond Orbital (NBO) values from Gaussian output (.log) files in the current directory and compile the results into an Excel spreadsheet.

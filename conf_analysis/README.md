@@ -1,0 +1,2 @@
+# rmsd
+Filters xyz files based on RMSD and energy differences, comparing all pairs in the current directory. Files falling below specified cutoff values for both RMSD and energy difference are marked for deletion. Marked files are moved to a 'to_delete' directory, while the rest are transferred to a **'to_keep'** directory.

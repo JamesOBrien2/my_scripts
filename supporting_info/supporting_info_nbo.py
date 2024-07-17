@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 
+# Author: James O'Brien
+# 03-05-2024
+
 import os
 import argparse
 import openpyxl
