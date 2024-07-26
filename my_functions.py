@@ -140,3 +140,17 @@ def convert_coord_to_xyz(input_file, output_file):
             y_ang = bohr_to_angstrom(float(y))
             z_ang = bohr_to_angstrom(float(z))
             f.write(f"{element.ljust(2)} {x_ang:12.6f} {y_ang:12.6f} {z_ang:12.6f}\n")
+
+def read_xyz_or_com(filename):
+    with open(filename, 'r') as file:
+        lines = file.readlines()
+    
+    if filename.endswith('.xyz'):
+        return lines[2:]  # Skip the first two lines for XYZ files
+    elif filename.endswith('.com'):
+        start_index = next((i for i, line in enumerate(lines) if len(line.split()) == 2 and all(part.lstrip('-').isdigit() for part in line.split())), None)
+        if start_index is not None:
+            return lines[start_index + 1:]
+    
+    # If the file format is not recognized, return all lines
+    return lines
