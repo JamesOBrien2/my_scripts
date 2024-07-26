@@ -13,6 +13,8 @@ For when looking to visualise a .xyz file in Gaussview, I use 'xyz2com' to quick
 
 For when running out of optimisation steps, I use 'rerun' to create a new .inp file from with the same keywords & the new .xyz coordinates from the output .xyz file.
 
-
 # coord2xyz
 A python script which converts coord files to xyz files. Includes conversion of Bohr to Angstroms.
+
+# coord2xyz
+A python script which converts smiles to xyz files.
