@@ -154,3 +154,51 @@ def read_xyz_or_com(filename):
     
     # If the file format is not recognized, return all lines
     return lines
+#!/usr/bin/python3
+import sys
+import plotly.graph_objects as go
+from my_functions import convergence_data
+
+def plot_convergence(data, title, threshold):
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(
+        x=list(range(len(data))),
+        y=data,
+        mode='lines+markers',
+        name=title,
+        hoverinfo='y'
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=list(range(len(data))),
+        y=[threshold] * len(data),
+        mode='lines',
+        name='Threshold',
+        line=dict(dash='dash', color='red')
+    ))
+
+    fig.update_layout(
+        title=title,
+        xaxis_title='Optimization Step',
+        yaxis_title='Value'
+    )
+
+    fig.show()
+
+def process_convergence_data(convergence_data):
+    processed_data = {}
+    for key, values in convergence_data.items():
+        processed_values = []
+        for value in values:
+            if value == "********":
+                processed_values.append(10)  # Set value to 10 when "********" is encountered
+                print(f"Comment: Value set to 10 for {key} due to '********'")
+            else:
+                try:
+                    processed_values.append(float(value))
+                except ValueError:
+                    processed_values.append(10)  # Set to 10 if conversion to float fails
+                    print(f"Comment: Value set to 10 for {key} due to conversion error")
+        processed_data[key] = processed_values
+    return processed_data

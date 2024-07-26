@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 import sys
 import plotext as plt
-from my_functions import convergence_data
+from my_functions import convergence_data, process_convergence_data
 
 def plot_convergence(data, title, threshold):
     plt.clf()
@@ -19,5 +19,7 @@ if __name__ == "__main__":
     file_path = sys.argv[1]
     convergence_data, thresholds = convergence_data(file_path)
 
-    for key, values in convergence_data.items():
+    processed_convergence_data = process_convergence_data(convergence_data)
+
+    for key, values in processed_convergence_data.items():
         plot_convergence(values, key, thresholds[key])
