@@ -16,6 +16,9 @@ Here is a repository where I will be dumping any scripts I make.
 |    ├── convert_orca.py
 |    ├── convert_sp.py
 |    └── coord2xyz.py
+├── file_conversions                   
+|    ├── plot_irc.py
+|    └── plot_uvvis.py
 ├── Supporting_Information                 
 |    └── supporting_info_nbo.py
 └── TBD
