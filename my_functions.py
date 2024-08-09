@@ -158,3 +158,17 @@ def read_xyz_or_com(filename):
     
     # If the file format is not recognized, return all lines
     return lines
+
+def find_closest_to_optimised_step(convergence_data, thresholds):
+    num_steps = len(next(iter(convergence_data.values())))
+    total_differences = [0] * num_steps
+
+    for key, values in convergence_data.items():
+        threshold = thresholds[key]
+        for i, value in enumerate(values):
+            if value > threshold:
+                total_differences[i] += (value - threshold)
+            else:
+                total_differences[i] += 0
+
+    return total_differences.index(min(total_differences))

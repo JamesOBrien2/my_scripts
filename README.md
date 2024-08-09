@@ -8,7 +8,8 @@ Here is a repository where I will be dumping any scripts I make.
 ├── my_functions.py 
 ├── conf_analysis       
 |    └── rmsd.py
-├── convergence_plots       
+├── convergence      
+|    ├── closest_step.py
 |    ├── convergence_cli.py
 |    └── convergence_interactive.py
 ├── file_conversions                   
